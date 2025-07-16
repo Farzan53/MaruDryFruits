@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart</title>
+  <link rel="stylesheet" href="i.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <h1>Maru Dry Fruits</h1>
+    </div>
+    <ul>
+      <li><a href="style.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+        <li><a href="signup.html">Create Account</a></li>
+    </ul>
+
+    <div class="navbar-search">
+      <a href="cart.html" class="cart-btn" aria-label="Cart">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      <input type="text" placeholder="search..." />
+      <button>search</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="page_header" class="about-header">
+    <h2>#Let's_talk</h2>
+    <p>Leave a message we would love to hear your opinion!</p>
+  </section>
+
+  <!-- Cart Table -->
+  <section id="cart" class="section-p1">
+    <table width="100%">
+      <thead>
+        <tr>
+          <td>Remove</td>
+          <td>Image</td>
+          <td>Product</td>
+          <td>Price</td>
+          <td>Quantity</td>
+          <td>Subtotal</td>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Cart Add -->
+  <section id="cart-add" class="section-p1">
+    <div id="coupon">
+      <h3>Apply Coupon</h3>
+      <div>
+        <input type="text" placeholder="enter your coupon" id="coupon-input">
+        <button class="normal" id="apply-coupon-btn">Apply</button>
+      </div>
+    </div>
+
+    <div id="subtotal">
+      <h3>Cart Totals</h3>
+      <table>
+        <tr>
+          <td>Cart Subtotal</td>
+          <td id="cart-subtotal">$0</td>
+        </tr>
+        <tr>
+          <td>Shipping</td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><strong id="cart-total">$0</strong></td>
+        </tr>
+      </table>
+      <button class="normal" id="checkout-btn">Proceed to checkout</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h2 class="footer-logo">Maru Dry Fruits</h2>
+        <p>Premium organic nuts & dried fruits delivered fresh.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul class="footer-contact">
+          <li><i class="fas fa-phone-alt"></i> +92 300 0000000</li>
+          <li><i class="fas fa-envelope"></i> info@marudryfruits.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
+        </ul>
+      </div>
+      <div class="footer-col social">
+        <h3>Follow Us</h3>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Maru Dry Fruits • All rights reserved</p>
+    </div>
+  </footer>
+<div class="cart-account-links">
+  <p>
+    Already have an account? <a href="login.html">Log in</a><br>
+    New customer? <a href="signup.html">Create an Account</a>
+  </p>
+</div>
+
+
+  <!-- SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const cartItemsTbody = document.getElementById('cart-items');
+      const couponInput = document.getElementById('coupon-input');
+      const couponBtn = document.getElementById('apply-coupon-btn');
+      const subtotalTd = document.getElementById('cart-subtotal');
+      const totalTd = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      if (!cart || cart.length === 0) {
+        cart = [
+          { name: "American almonds", price: 22, quantity: 1, image: "project-img/almods in 2 bowl.jpg" },
+          { name: "Royal Afghan Figs", price: 28, quantity: 1, image: "project-img/anjeer.jpg" },
+          { name: "Organic Soft Medjool Delights", price: 18, quantity: 1, image: "project-img/dates2.avif" }
+        ];
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+
+      let couponApplied = false;
+
+      function renderCart() {
+        cartItemsTbody.innerHTML = '';
+
+        if (cart.length === 0) {
+          cartItemsTbody.innerHTML = '<tr><td colspan="6">Your cart is empty.</td></tr>';
+          subtotalTd.textContent = '$0';
+          totalTd.textContent = '$0';
+          return;
+        }
+
+        cart.forEach((item, index) => {
+          const itemSubtotal = item.price * item.quantity;
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><i class="far fa-times-circle remove-btn" data-index="${index}"></i></td>
+            <td><img src="${item.image}" alt="" width="70"></td>
+            <td>${item.name}</td>
+            <td>$${item.price}</td>
+            <td><input type="number" value="${item.quantity}" min="1" data-index="${index}" class="qty-input"></td>
+            <td class="item-subtotal">$${itemSubtotal.toFixed(2)}</td>
+          `;
+          cartItemsTbody.appendChild(row);
+        });
+
+        attachRemoveListeners();
+        attachQtyListeners();
+        updateTotals();
+      }
+
+      function attachRemoveListeners() {
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const index = this.dataset.index;
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+          });
+        });
+      }
+
+      function attachQtyListeners() {
+        document.querySelectorAll('.qty-input').forEach(input => {
+          input.addEventListener('change', function() {
+            const index = this.dataset.index;
+            let newQty = parseInt(this.value);
+            if (newQty < 1) newQty = 1;
+            cart[index].quantity = newQty;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+          });
+        });
+      }
+
+      function updateTotals() {
+        let subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        subtotalTd.textContent = `$${subtotal.toFixed(2)}`;
+        if (couponApplied) {
+          totalTd.textContent = `$${(subtotal * 0.9).toFixed(2)}`;
+        } else {
+          totalTd.textContent = `$${subtotal.toFixed(2)}`;
+        }
+      }
+
+      couponBtn.addEventListener('click', function() {
+        const code = couponInput.value.trim();
+        if (code === "SAVE10") {
+          couponApplied = true;
+          updateTotals();
+          alert("Coupon applied! 10% off");
+        } else {
+          alert("Invalid coupon code");
+        }
+      });
+
+      checkoutBtn.addEventListener('click', function() {
+        if (cart.length === 0) {
+          alert("Your cart is empty.");
+          return;
+        }
+        alert("Thank you for your order!");
+        cart = [];
+        localStorage.removeItem('cart');
+        renderCart();
+      });
+
+      renderCart();
+    });
+  </script>
+</body>
+</html>

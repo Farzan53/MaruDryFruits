@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="i.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-GX9xX…your‑checksum…"
+      crossorigin="anonymous" referrerpolicy="no-referrer" > 
+</head>
+<body>
+  
+
+
+ <nav class="navbar">
+  <div class="navbar-logo">
+    <h1>Maru Dry Fruits</h1>
+  </div>
+
+  <ul>
+    <li><a href="style.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html">Create Account</a></li>
+
+</a>
+
+  </ul>
+
+  <div class="navbar-search">
+  <a href="cart.html" class="cart-btn" aria-label="Cart">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+  <input type="text" placeholder="search...">
+  <button>search</button>
+</div>
+
+</nav>
+
+<!--hero-->
+<section id="pageheader" class="about-header">
+   <h2>#Let's_talk</h2>
+   <p>Leave a message we would love to hear your opinion!</p>
+</section>
+
+
+
+<section id="contact-details" class="section-p1">
+  <div class="details">
+    <span>GET IN TOUCH</span>
+    <h2>Visit one of our agency location or contact us</h2>
+    <h3>Head Office</h3>
+    <div>
+      <li>
+  <i class="fal fa-map"></i>
+  <p>Board office Nazimabad "APTECH CENTER"</p>
+</li>
+<li>
+  <i class="faR fa-envelope"></i>
+  <p>contact@Aptech.com</p>
+</li>
+      <li>
+        <i class="fas fa-phone-alt"></i>
+        <p>contact@Aptech.com</p>
+      </li>
+      <li>
+        <i class="far fa-clock"></i>
+        <p>Monday to Saturday: 9:00am to 9:00pm</p>
+      </li>
+    </div>
+  </div>
+
+ 
+  <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1768.7311627839294!2d67.03244757588503!3d24.92718919284164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f90157042d3%3A0x93d609e8bec9a880!2sAptech%20Computer%20Education%20North%20Nazimabad%20Center!5e0!3m2!1sen!2s!4v1751036328642!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"> width="600" height="450"></iframe>"
+  </div>
+</section>
+
+
+<section id="form-details">
+  <form id="contactForm" action="">
+    <span>LEAVE A MESSAGE</span>
+    <h2>We love to hear your thoughts</h2>
+    <input type="text" id="name" placeholder="your name">
+    <input type="text" id="email" placeholder="your E-mail">
+    <input type="text" id="subject" placeholder="your subject">
+    <textarea id="message" cols="30" placeholder="your message"></textarea>
+    <button type="submit" class="normal">submit</button>
+  </form>
+</section>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+   
+
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Column 1  Logo / Brand -->
+    <div class="footer-col">
+      <h2 class="footer-logo">Maru Dry Fruits</h2>
+      <p>Premium organic nuts & dried fruits delivered fresh.</p>
+    </div>
+
+    <!-- Column 2  Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+         <li><a href="#">Blog</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3  Contact -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul class="footer-contact">
+        <li><i class="fas fa-phone-alt"></i> +92 300 0000000</li>
+        <li><i class="fas fa-envelope"></i> info@marudryfruits.com</li>
+        <li><i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
+      </ul>
+    </div>
+
+    <!-- Column 4  Social -->
+    <div class="footer-col social">
+      <h3>Follow Us</h3>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Maru Dry Fruits • All rights reserved</p>
+  </div>
+</footer>
+
+</div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("contactForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const subjectInput = document.getElementById("subject");
+    const messageInput = document.getElementById("message");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // stop form from submitting normally
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const subject = subjectInput.value.trim();
+      const message = messageInput.value.trim();
+
+      // Check for empty fields
+      if (!name || !email || !subject || !message) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Basic email pattern
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      // If everything is valid
+      alert(`Thank you, ${name}! Your message has been sent.`);
+
+      // Optionally clear the form
+      form.reset();
+    });
+  });
+</script>
+
+</body>
+</html>
